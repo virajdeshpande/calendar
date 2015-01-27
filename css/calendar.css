@@ -1,0 +1,106 @@
+body {
+	font-family: verdana, Helvetica, Arial, 'lucida grande', tahoma, arial, sans-serif;
+	font-size: 12px;
+	margin:0;
+	padding:0;
+}
+
+span {
+	display: inline;
+}
+
+nav {
+	background-color: #3b5998;
+	border-radius: 0 0 5px 5px; 
+	color: white;
+	height: 40px;
+	width: 90%;
+	margin: auto;
+}
+
+nav #txtLogo {
+	background-image: url('../images/facebook_logo.jpg');
+	background-size: 110px;
+  background-repeat: no-repeat;
+	height: 30px;
+	width: 200px;
+	position: relative;
+	left: 20px;
+	top: 5px;
+}
+
+div.dayView {
+	height: 720px;
+	min-width: 720px; /* timslots + events */
+	margin-left: 100px;
+	margin-top: 50px;
+}
+
+.dayView .timeslots {
+	width: 100px;
+	float: left;
+}
+
+.dayView .events {
+	width: 620px;
+	height: 720px;
+	background-color: #ececec;
+	padding: 0 10px;
+	float: left;
+	position: relative;
+}
+
+.timeslots ul.container {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.timeslots li {
+	width: 100px;
+	height: 30px;
+	color: #5e5e5e;
+	text-align: right;
+	position: relative;
+	top: -6px;
+}
+
+.timeslots li span {
+	margin: 0 3px;
+	font-size: 11px;
+}
+
+.timeslots li.fullTime span:first-child {
+	font-weight: bold;
+	color: #000;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.events .event {
+	background-color: #fff;
+	border: 1px solid #ececec;
+	border-left: 3px solid #3B5998;
+	padding: 3px;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	position: absolute;
+}
+
+.event span {
+	display: block;
+}
+
+.event .title {
+	color: #3B5998;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.event .location {
+	color: #3B5998;
+	font-size: 11px;
+}
