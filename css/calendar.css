@@ -5,6 +5,12 @@ body {
 	padding:0;
 }
 
+* {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
 span {
 	display: inline;
 }
@@ -45,7 +51,8 @@ div.dayView {
 	width: 620px;
 	height: 720px;
 	background-color: #ececec;
-	padding: 0 10px;
+	border-left: 10px solid #ececec;
+	border-right: 10px solid #ececec;
 	float: left;
 	position: relative;
 }
@@ -84,9 +91,6 @@ div.dayView {
 	border: 1px solid #ececec;
 	border-left: 3px solid #3B5998;
 	padding: 3px;
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	position: absolute;
 }
 

@@ -85,7 +85,6 @@ Calendar.prototype.layoutEvents = function(events, eventsContainer, eventTemplat
 
   var conflictingEventCount = 0;
   var resetIndex = 0;
-  var maxWidthAvailable = 760;
   var maxColumnsForIteration = 1;
   var currentIndex = 1;
 
@@ -141,7 +140,7 @@ Calendar.prototype.layoutEvents = function(events, eventsContainer, eventTemplat
       currentIndex++;
   }
 
-  console.log(calendarEvents);
+  //console.log(calendarEvents);
 
   var outputHtml = Mustache.render(eventTemplate, {"events": calendarEvents});
   $(eventsContainer).html(outputHtml);
