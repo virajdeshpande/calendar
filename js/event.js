@@ -2,6 +2,7 @@ function Event(start, end) {
 	this.start = start;
   this.end = end;
   this.columnIndex = 0;
+  this.columnSpan = 1;
   this.totalColumnsInConflictingGraph = 1;
   this.duration = end - start;
   this.title = "Sample Item";
@@ -28,7 +29,7 @@ Object.defineProperties(Event.prototype, {
   },
   "width": {
     get: function() {
-      return 100 / this.totalColumnsInConflictingGraph; // in percentage
+      return this.columnSpan * 100 / this.totalColumnsInConflictingGraph; // in percentage
     }
   },
   "height": {

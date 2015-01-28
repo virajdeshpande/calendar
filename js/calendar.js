@@ -140,24 +140,57 @@ Calendar.prototype.layoutEvents = function(events, eventsContainer, eventTemplat
       currentIndex++;
   }
 
+  // find for multi column overlap
+  var totalEvents = calendarEvents.length;
+  for(i = 0 ; i < totalEvents; i++) {
+    iteratingEvent = calendarEvents[i];
+    var columnSpan = iteratingEvent.totalColumnsInConflictingGraph - iteratingEvent.columnIndex;
+    var nextEvent = calendarEvents[i+1];
+
+    /*
+      1. If i have more than 2 columns layout in graph - AND
+      2. columnIndex is less than last column index - AND
+      3. either there is no event after me OR next event begins after the end of me
+    */
+    if( iteratingEvent.totalColumnsInConflictingGraph > 2 &&
+        iteratingEvent.columnIndex < iteratingEvent.totalColumnsInConflictingGraph - 1 && 
+        (!nextEvent || (nextEvent.start >= iteratingEvent.end))) {
+      iteratingEvent.columnSpan = Calendar.nearestConflictingEventColumnIndex(iteratingEvent) - iteratingEvent.columnIndex;
+    }
+  }
+
   //console.log(calendarEvents);
 
   var outputHtml = Mustache.render(eventTemplate, {"events": calendarEvents});
   $(eventsContainer).html(outputHtml);
 }
 
+Calendar.nearestConflictingEventColumnIndex = function(eventObj) {
+  var totalEvents = eventObj.priorConflictingEvents.length;
+  var nearestColumn = eventObj.totalColumnsInConflictingGraph - 1; // set it to last index as default
+
+  for(var i = 0; i < totalEvents; i++) {
+    var iteratingEvent = eventObj.priorConflictingEvents[i];
+    var iteratingEventColumnIndex = iteratingEvent.columnIndex;
+    if(eventObj.columnIndex  < iteratingEventColumnIndex && iteratingEventColumnIndex < nearestColumn) {
+      nearestColumn = iteratingEventColumnIndex;
+    }
+  }
+  return nearestColumn;
+}
+
 Calendar.findFirstAvailableColumn = function(eventObj, maxColumns) {
   var eventFreeColumn = new Array(maxColumns);
-  for(var i=0; i<maxColumns; i++) {
+  for(var i = 0; i < maxColumns; i++) {
     eventFreeColumn[i] = true;
   }
 
   var conflictingEvents = eventObj.priorConflictingEvents.length;
-  for(i=0; i<conflictingEvents; i++) {
+  for(i = 0; i<conflictingEvents; i++) {
     eventFreeColumn[eventObj.priorConflictingEvents[i].columnIndex] = false;
   }
 
-  for(i=0; i<maxColumns; i++){
+  for(i = 0; i < maxColumns; i++){
     if(eventFreeColumn[i]) {
       return i;
     }
